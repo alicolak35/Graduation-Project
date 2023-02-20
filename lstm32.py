@@ -7,14 +7,13 @@ from keras.layers import LSTM, Dense, SimpleRNN
 import tensorflow as tf
 import numpy as np
 import seaborn as sns
-from imblearn.over_sampling import SMOTE
+
 
 # Load the dataset
 data = pd.read_csv("merged_augmented_data.csv")
 
 
 # Preprocess the data
-#features = data["Features"].str.split().apply(lambda x: [float(i) for i in x])
 features = data["Features"].str.replace("[","").str.replace("]","").str.split().apply(lambda x: [float(i) for i in x])
 features = features.values.tolist()
 features = StandardScaler().fit_transform(features)
@@ -27,9 +26,8 @@ X_train, X_test, y_train, y_test = train_test_split(features, labels, test_size=
 
 # Design of the model
 model = Sequential()
-model.add(LSTM(128, input_shape=(X_train.shape[1], 1)))
+model.add(SimpleRNN(8, input_shape=(X_train.shape[1], 1)))
 model.add(Dense(128, activation='relu'))
-#model.add(Dense(256, activation='relu'))
 model.add(Dense(2, activation='softmax'))
 
 # Compile the model
@@ -60,8 +58,6 @@ cr = classification_report(np.argmax(y_test, axis=1), y_pred)
 # get accuracy
 acc = accuracy_score(np.argmax(y_test, axis=1), y_pred)
 
-
-
 # print results
 print("Confusion Matrix: \n", cm)
 print("Classification Report: \n", cr)
@@ -71,11 +67,6 @@ ax = sns.heatmap(cm, annot=True, fmt='d')
 
 print(model.summary())
 
-#plot_model(model,to_file="rnnlayers.png")
-#plt.show()
-
-
 # Save the model
-#model.save('Rnn8-dense128.h5')
-#tf.lite.TFLiteConverter.from_saved_model("rnn8-aug")  16.01:olmadı bu şekilde
-#tf.keras.models.save_model(model, 'path/to/save/rnn128')
+model.save('Rnn8-dense128.h5')
+
