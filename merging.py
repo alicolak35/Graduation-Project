@@ -7,23 +7,18 @@ from glob import glob
 import pandas as pd
 import matplotlib.pyplot as plt
 import librosa.display
-import csv
 
 dosya_1="audio_and_txt_filess"
 ses_dosyalari=glob(dosya_1 + "/*.wav")
-ses_dosyalari.index("148_1b1_Al_sc_Meditron_sr200_time_shifted")
-
 
 filenames=[f for f in listdir(dosya_1) if (isfile(join(dosya_1,f)) and f.endswith(".wav"))]
-"""""
 
 p_id_in_file=[]
 for name in filenames:
     p_id_in_file.append(int(name[:3]))
 
 p_id_in_file= np.array(p_id_in_file)
-## mfcc features ekleyim
-##makine öğrenmesiyle daha etkili sonuç aalbilirim, mö+dö
+
 
 fn_list_i = [
         feature.chroma_stft,
@@ -43,14 +38,15 @@ def get_feature_vector(y, sr):
     feat_vect_i = [np.mean(funct(y, sr)) for funct in fn_list_i]
     feat_vect_ii = [np.mean(funct(y)) for funct in fn_list_ii]
 
-    feature_vector = np.round(feat_vect_i, 2) + np.round(feat_vect_ii, 2)
-    #feature_vector = np.round(feature_vector, 2)
+    feature_vector = feat_vect_i + feat_vect_ii
+    feature_vector = np.round(feature_vector, 2)
     return feature_vector
 
 filepaths=[join(dosya_1,f) for f in filenames]
 
 tani_dosyasi=pd.read_csv("patient_diagnosis1.csv",header=None)
 labels = np.array([tani_dosyasi[tani_dosyasi[0] == x][1].values[0] for x in p_id_in_file])
+
 # build the matrix with normal audios featurized
 audios_feat = []
 for file in ses_dosyalari:
@@ -76,8 +72,7 @@ df.to_csv("audio_and_text.csv", index=False)
 
 # Read the audio features file
 audio_features = pd.read_csv("audio_and_text.csv")
-"""
-"""""
+
 # Read the diagnosis file
 diagnosis = pd.read_csv("patient_diagnosis1.csv",header=None)
 
