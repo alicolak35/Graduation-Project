@@ -1,6 +1,5 @@
 # Tiny ML based Stethoscope
 
-This project is developing based on Tiny ML. 
 
    Air pollution is one of the biggest environmental threat to human health on a global scale. Outdoor and indoor air pollution causes 7 million premature deaths in the world every year. Air pollution was listed among the most important risk factors for chronic diseases in Europe for the first time. Air pollution causes many chronic diseases, but this situation cannot be monitored. There is only 25-40% of Chronic Obstructive Pulmonary Disease(COPD) patients know that they have COPD in developed countries, remains are either don't know that they have COPD or misdiagnosed. With the being preferred to established of Thermal Power Plant to the rural areas, it becomes widely seen disease in such areas. 
 
