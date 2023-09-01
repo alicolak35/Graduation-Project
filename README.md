@@ -9,4 +9,4 @@
    
    In this study, the conceptual framework of a ready-to-use device proposal based on Tiny ML method, which is cheap, low in energy consumption, does not require internet connection, thus preventing network latency and ensuring data security, is explained. It is thought that it would be beneficial for Family Physicians to diagnose and follow the lung conditions of patients with a lack of advanced medical devices in FHC.
    
-  
+  Here is the detailed document of the project: https://drive.google.com/file/d/1mwRCv5etAjHRTfBerB4mSkhIqVPjJ00R/view?usp=drive_link
